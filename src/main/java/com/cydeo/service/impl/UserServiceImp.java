@@ -44,6 +44,9 @@ private final UserMapper userMapper;
     @Override
     public void deleteByUserName(String username) {
 
+        userRepository.deleteByUserName(username);
+
+
     }
 
     @Override
