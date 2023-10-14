@@ -8,6 +8,7 @@ import com.cydeo.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,5 +44,17 @@ private final UserMapper userMapper;
     @Override
     public void deleteByUserName(String username) {
 
+    }
+
+    @Override
+    public UserDTO update(UserDTO user) {
+        User userEnt = userRepository.findByUserName(user.getUserName()).get();
+
+        User convertedUser = userMapper.convertToEntity(user);
+
+        convertedUser.setId(userEnt.getId());
+
+        userRepository.save(convertedUser);
+        return findByUserName(user.getUserName());
     }
 }
