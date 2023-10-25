@@ -44,7 +44,10 @@ private final UserMapper userMapper;
     @Override
     public void deleteByUserName(String username) {
 
-        userRepository.deleteByUserName(username);
+        User user = userRepository.findByUserName(username).get();
+
+        user.setIsDeleted(true);
+        //userRepository.deleteByUserName(username);
 
 
     }
@@ -59,5 +62,15 @@ private final UserMapper userMapper;
 
         userRepository.save(convertedUser);
         return findByUserName(user.getUserName());
+    }
+
+    @Override
+    public void delete(String username) {
+
+        User user = userRepository.findByUserName(username).get();
+        user.setIsDeleted(true);
+
+        userRepository.save(user);
+
     }
 }
