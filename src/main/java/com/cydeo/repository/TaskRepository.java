@@ -9,5 +9,5 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task,Long> {
 
     @Override
-    List<Task> findAll(Sort sort);
+    List<Task> findAll();
 }
