@@ -1,5 +1,6 @@
 package com.cydeo.repository;
 
+import com.cydeo.entity.Project;
 import com.cydeo.entity.Task;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +20,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             +" from tasks t join projects p on t.project_id = p.id "
             +"where p.project_code =?1 and t.task_status ='COMPLETE'")
     int totalNonCompletedTasks(String projectCode);
+
+    List<Task> findAllByProject(Project project);
 }
